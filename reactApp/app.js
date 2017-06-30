@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const dummyData = ["Clean the dog", "eat a bagel", "Take over the world"]
+const dummyData = [{ taskText: "Catch 'em all", completed: false }, { taskText: "Eat a bagel", completed: true}, { taskText: "Take over the world, Pinky", completed: false }]
 
 
 class TodoList extends React.Component {
@@ -13,7 +13,12 @@ class TodoList extends React.Component {
    render(){
 
      return (<ul>
-      {this.props.tasks.map((task) => <li key={task}><input type="checkbox" value="1" />{task}</li>)}
+      {this.props.tasks.map((task) => { if(task.completed){
+        return <li key={task.taskText}><input type="checkbox" value="1" /> <strike> {task.taskText} </strike></li>
+      }else{
+        return <li key={task.taskText}><input type="checkbox" value="1" />{task.taskText}</li>
+      }
+    })}
     </ul>)
    }
   }

@@ -9790,20 +9790,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var dummyData = ["Clean the dog", "eat a bagel", "Take over the world"];
+var dummyData = [{ taskText: "Catch 'em all", completed: false }, { taskText: "Eat a bagel", completed: true }, { taskText: "Take over the world, Pinky", completed: false }];
 
-var Todo = function (_React$Component) {
-  _inherits(Todo, _React$Component);
+var TodoList = function (_React$Component) {
+  _inherits(TodoList, _React$Component);
 
-  function Todo(props) {
-    _classCallCheck(this, Todo);
+  function TodoList(props) {
+    _classCallCheck(this, TodoList);
 
-    return _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this, props));
+    return _possibleConstructorReturn(this, (TodoList.__proto__ || Object.getPrototypeOf(TodoList)).call(this, props));
     // this.state = {
     //   tasks: dummyData
   }
 
-  _createClass(Todo, [{
+  _createClass(TodoList, [{
     key: 'render',
     value: function render() {
 
@@ -9811,20 +9811,86 @@ var Todo = function (_React$Component) {
         'ul',
         null,
         this.props.tasks.map(function (task) {
-          return _react2.default.createElement(
-            'li',
-            { style: { "color": "purple" } },
-            task
-          );
+          if (task.completed) {
+            _react2.default.createElement(
+              'li',
+              { key: task },
+              _react2.default.createElement('input', { type: 'checkbox', value: '1' }),
+              _react2.default.createElement(
+                'strike',
+                null,
+                task.taskText
+              )
+            );
+          } else {
+            _react2.default.createElement(
+              'li',
+              { key: task },
+              _react2.default.createElement('input', { type: 'checkbox', value: '1' }),
+              task.taskText
+            );
+          }
         })
       );
     }
   }]);
 
-  return Todo;
+  return TodoList;
 }(_react2.default.Component);
 
-_reactDom2.default.render(_react2.default.createElement(TodoList, { tasks: dummyData }), document.getElementById('root'));
+var InputLine = function (_React$Component2) {
+  _inherits(InputLine, _React$Component2);
+
+  function InputLine(props) {
+    _classCallCheck(this, InputLine);
+
+    return _possibleConstructorReturn(this, (InputLine.__proto__ || Object.getPrototypeOf(InputLine)).call(this, props));
+  }
+
+  _createClass(InputLine, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'form',
+          null,
+          _react2.default.createElement('input', { type: 'text', name: 'todoadd' }),
+          _react2.default.createElement('input', { type: 'submit', name: 'submitadd', value: 'Todo Add' })
+        )
+      );
+    }
+  }]);
+
+  return InputLine;
+}(_react2.default.Component);
+
+var TodoApp = function (_React$Component3) {
+  _inherits(TodoApp, _React$Component3);
+
+  function TodoApp(props) {
+    _classCallCheck(this, TodoApp);
+
+    return _possibleConstructorReturn(this, (TodoApp.__proto__ || Object.getPrototypeOf(TodoApp)).call(this, props));
+  }
+
+  _createClass(TodoApp, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(InputLine, null),
+        _react2.default.createElement(TodoList, { tasks: dummyData })
+      );
+    }
+  }]);
+
+  return TodoApp;
+}(_react2.default.Component);
+
+_reactDom2.default.render(_react2.default.createElement(TodoApp, null), document.getElementById('root'));
 
 /***/ }),
 /* 84 */
